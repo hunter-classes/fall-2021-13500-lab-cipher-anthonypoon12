@@ -85,7 +85,7 @@ double distance(int input[26], double base[26])
 	}
 //	std::cout<<sqrt(sum)<<" cool\n";
 	return sqrt(sum);
-}
+}/*
 void addfrequencies(double input[],std::string filename)
 {
 //	std::cout<<"hi";
@@ -111,7 +111,7 @@ void addfrequencies(double input[],std::string filename)
 
 	file.close();
 }
-
+*/
 std::string solve(std::string encrypted_string)
 {
 	double frequencies[26]={0.08167, 0.01492, 0.02782, 0.04253, 	0.12702, 0.02228,
@@ -135,6 +135,5 @@ std::string solve(std::string encrypted_string)
 //	std::cout<<ind<<" hi "<<minimum<<"\n";
 	}
 //	std::cout<<encryptCaesar(dummy,21);
-	dummy=encryptCaesar(dummy,ind);
-    return dummy;
+    return encryptCaesar(encrypted_string,ind);
 }
