@@ -91,11 +91,8 @@ void addfrequencies(double input[],std::string filename)
 	std::string small = "";
 	std::string dummy = "";
 	std::ifstream file(filename);
-	//std::cout<<"hi";
 	while (getline(file,small))
 		totalstring+=small;
-//	std::cout<<totalstring;
-	//std::cout<<"hey";
 
     for (char c: totalstring)
     {
@@ -120,7 +117,7 @@ std::string solve(std::string encrypted_string, std::string filename)
     std::string dummy = "";
     for (char c: encrypted_string)
     {
-        if (!isspace(c))
+        if ((!isspace(c))&&(isalpha(c)))
             dummy+=tolower(c);
     }
     for (char d: dummy)
