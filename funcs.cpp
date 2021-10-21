@@ -2,6 +2,8 @@
 #include "funcs.h"
 #include <cctype>
 #include <vector>
+#include <math.h>
+#include <fstream>
 char shiftChar(char c, int rshift)
 {
 	char output = c;
@@ -73,8 +75,42 @@ std::vector<std::vector<int>> helper(int input[26], int s)//creates a vector mad
     }
     return output;
 }
-std::string solve(std::string encrypted_string)
+double distance(std::vector<int> input, int base[26])
 {
+	int sum = 0;
+	for (int i = 0 ;i  < input.size(); i++)
+	{
+		sum += pow(input[i]-base[i],2);
+	}
+	return sqrt(sum);
+}
+void addfrequencies(int input[],std::string filename)
+{
+	std::string totalstring = "";
+	std::string small = "";
+	std::ifstream file(filename);
+	while (getline(file,small))
+		totalstring+=small;
+	std::string dummy = "";
+    for (char c: totalstring)
+    {
+        if (!isspace(c))
+            dummy+=tolower(c);
+    }
+    for (char d: dummy)
+    {
+        input[d-'a']+=1;
+    }
+    for (int i = 0; i < 26;i++)
+    {
+        input[i]=(double)input[i]/dummy.size();
+    }
+	
+}
+std::string solve(std::string encrypted_string, std::string filename)
+{
+	int frequencies[26];
+	addfrequencies(frequencies, filename);
     int fofinput[26];
     std::string dummy = "";
     for (char c: encrypted_string)
@@ -91,5 +127,16 @@ std::string solve(std::string encrypted_string)
         fofinput[i]=(double)fofinput[i]/dummy.size();
     }
     std::vector<std::vector<int>> rotations = helper(fofinput,sizeof(fofinput)/sizeof(fofinput[0]));
-    return "";
+	double minimum = distance(rotations[0],frequencies);
+	int ind = 0;
+	for (int i = 1; i < rotations.size(); i++)
+	{
+		if (minimum > distance(rotations[i],frequencies))
+		{
+			minimum = distance(rotations[i],frequencies);
+			ind = i;
+		}
+	}
+	dummy=encryptCaesar(dummy,ind);
+    return dummy;
 }
