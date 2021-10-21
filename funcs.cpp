@@ -58,7 +58,7 @@ std::string decryptVigenere(std::string ciphertext, std::string keyword)
 	output =encryptVigenere(ciphertext, dummy);
 	return output;
 }
-std::vector<std::vector<int>> helper(int input[26], int s)//creates a vector made of all the rotations of the input vector
+std::vector<std::vector<int>> helper(double input[26], int s)//creates a vector made of all the rotations of the input vector
 {
     std::vector<std::vector<int>> output;
     for (int i = 0 ; i < s; i++)
@@ -75,7 +75,7 @@ std::vector<std::vector<int>> helper(int input[26], int s)//creates a vector mad
     }
     return output;
 }
-double distance(std::vector<int> input, int base[26])
+double distance(std::vector<int> input, double base[26])
 {
 	int sum = 0;
 	for (int i = 0 ;i  < input.size(); i++)
@@ -84,34 +84,39 @@ double distance(std::vector<int> input, int base[26])
 	}
 	return sqrt(sum);
 }
-void addfrequencies(int input[],std::string filename)
+void addfrequencies(double input[],std::string filename)
 {
+//	std::cout<<"hi";
 	std::string totalstring = "";
 	std::string small = "";
+	std::string dummy = "";
 	std::ifstream file(filename);
+	//std::cout<<"hi";
 	while (getline(file,small))
 		totalstring+=small;
-	std::string dummy = "";
+//	std::cout<<totalstring;
+	//std::cout<<"hey";
+
     for (char c: totalstring)
     {
-        if (!isspace(c))
-            dummy+=tolower(c);
-    }
-    for (char d: dummy)
-    {
-        input[d-'a']+=1;
+        if (!isspace(c)&&(isalpha(c)!=0))
+	{
+          input[(int)tolower(c)-(int)'a']+=1;
+		dummy += c;
+	}
     }
     for (int i = 0; i < 26;i++)
     {
         input[i]=(double)input[i]/dummy.size();
     }
-	
+
+	file.close();
 }
 std::string solve(std::string encrypted_string, std::string filename)
 {
-	int frequencies[26];
+	double frequencies[26];
 	addfrequencies(frequencies, filename);
-    int fofinput[26];
+    double fofinput[26];
     std::string dummy = "";
     for (char c: encrypted_string)
     {
