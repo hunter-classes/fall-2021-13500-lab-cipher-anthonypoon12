@@ -58,60 +58,27 @@ std::string decryptVigenere(std::string ciphertext, std::string keyword)
 	output =encryptVigenere(ciphertext, dummy);
 	return output;
 }
-std::vector<int[26]> helper(std::string input)//creates a vector made of all the rotations of the input vector
+void helper(double cases[][26], std::string input)
 {
-	std::vector<int[26]> output;
 	for (int i = 0; i < 26; i++)
 	{
-		int dum[26];
-		std::string dummy = encryptCaesar(input, i);
+		std::string dummy = encryptCaesar(input,i);
 		for (char c: dummy)
 		{
 			if ((!isspace(c))&&(isalpha(c)))
-			{
-				dum[tolower(c)-'a']++;
-			}
+				cases[i][tolower(c)-'a']++;
 		}
-		output.push_back(dum);
 	}
-	return output;
 }
-double distance(int input[26], double base[26])
+double distance(double input[26], double base[26])
 {
 	double sum = 0;
 	for (int i = 0 ;i  < 26; i++)
 	{
 		sum += pow((input[i]-base[i]),2);
 	}
-//	std::cout<<sqrt(sum)<<" cool\n";
 	return sqrt(sum);
-}/*
-void addfrequencies(double input[],std::string filename)
-{
-//	std::cout<<"hi";
-	std::string totalstring = "";
-	std::string small = "";
-	std::string dummy = "";
-	std::ifstream file(filename);
-	while (getline(file,small))
-		totalstring+=small;
-
-    for (char c: totalstring)
-    {
-        if (!isspace(c)&&(isalpha(c)!=0))
-	{
-          input[(int)tolower(c)-(int)'a']+=1;
-		dummy += c;
-	}
-    }
-    for (int i = 0; i < 26;i++)
-    {
-        input[i]=(double)input[i]/dummy.size();
-    }
-
-	file.close();
 }
-*/
 std::string solve(std::string encrypted_string)
 {
 	double frequencies[26]={0.08167, 0.01492, 0.02782, 0.04253, 	0.12702, 0.02228,
@@ -119,21 +86,18 @@ std::string solve(std::string encrypted_string)
                      0.02406, 0.06749, 0.07507, 0.01929, 0.00095, 0.05987,
                      0.06327, 0.09056, 0.02758, 0.00978, 0.02360, 0.00150,
                      0.01974, 0.00074};
-    
-    std::vector<int[26]> rotations = helper(encrypted_string);
-	double minimum = distance(rotations[0],frequencies);
-//	std::cout<<minimum<<" this is first\n";
+	double arr[26][26];
+	helper(arr, encrypted_string);
+	double minimum = distance(arr[0],frequencies);
 	int ind = 0;
-	for (int i = 1; i < rotations.size(); i++)
+	for (int i = 1; i < 26; i++)
 	{
-	//	std::cout<<i<<" , "<<distance(rotations[i],frequencies)<<"\n";
-		if (minimum > distance(rotations[i],frequencies))
+		double result = distance(arr[i],frequencies);
+		if (minimum>result)
 		{
-			minimum = distance(rotations[i],frequencies);
+			minimum = result;
 			ind = i;
 		}
-//	std::cout<<ind<<" hi "<<minimum<<"\n";
 	}
-//	std::cout<<encryptCaesar(dummy,21);
-    return encryptCaesar(encrypted_string,ind);
+	return encryptCaesar(encrypted_string,ind);
 }
