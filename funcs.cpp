@@ -58,27 +58,28 @@ std::string decryptVigenere(std::string ciphertext, std::string keyword)
 	output =encryptVigenere(ciphertext, dummy);
 	return output;
 }
-std::vector<std::vector<int>> helper(double input[26], int s)//creates a vector made of all the rotations of the input vector
+std::vector<int[26]> helper(std::string input)//creates a vector made of all the rotations of the input vector
 {
-    std::vector<std::vector<int>> output;
-    for (int i = 0 ; i < s; i++)
-    {
-        std::vector<int> miniout;
-        for (int j = 0; j < s;j++)
-        {
-            int a = i+j;
-            if (a>s-1)
-                a = i+j - s;
-            miniout.push_back(input[a]);
-        }
-        output.push_back(miniout);
-    }
-    return output;
+	std::vector<int[26]> output;
+	for (int i = 0; i < 26; i++)
+	{
+		int dum[26];
+		std::string dummy = encryptCaesar(input, i);
+		for (char c: dummy)
+		{
+			if ((!isspace(c))&&(isalpha(c)))
+			{
+				dum[tolower(c)-'a']++;
+			}
+		}
+		output.push_back(dum);
+	}
+	return output;
 }
-double distance(std::vector<int> input, double base[26])
+double distance(int input[26], double base[26])
 {
 	double sum = 0;
-	for (int i = 0 ;i  < input.size(); i++)
+	for (int i = 0 ;i  < 26; i++)
 	{
 		sum += pow((input[i]-base[i]),2);
 	}
@@ -110,26 +111,16 @@ void addfrequencies(double input[],std::string filename)
 
 	file.close();
 }
-std::string solve(std::string encrypted_string, std::string filename)
+
+std::string solve(std::string encrypted_string)
 {
-	double frequencies[26];
-	addfrequencies(frequencies, filename);
-    double fofinput[26];
-    std::string dummy = "";
-    for (char c: encrypted_string)
-    {
-        if ((!isspace(c))&&(isalpha(c)))
-            dummy+=tolower(c);
-    }
-    for (char d: dummy)
-    {
-        fofinput[d-'a']+=1;
-    }
-    for (int i = 0; i < sizeof(fofinput)/sizeof(fofinput[0]);i++)
-    {
-        fofinput[i]=(double)fofinput[i]/dummy.size();
-    }
-    std::vector<std::vector<int>> rotations = helper(fofinput,sizeof(fofinput)/sizeof(fofinput[0]));
+	double frequencies[26]={0.08167, 0.01492, 0.02782, 0.04253, 	0.12702, 0.02228,
+                     0.02015, 0.06094, 0.06966, 0.00153, 0.00772, 0.04025,
+                     0.02406, 0.06749, 0.07507, 0.01929, 0.00095, 0.05987,
+                     0.06327, 0.09056, 0.02758, 0.00978, 0.02360, 0.00150,
+                     0.01974, 0.00074};
+    
+    std::vector<int[26]> rotations = helper(encrypted_string);
 	double minimum = distance(rotations[0],frequencies);
 //	std::cout<<minimum<<" this is first\n";
 	int ind = 0;
