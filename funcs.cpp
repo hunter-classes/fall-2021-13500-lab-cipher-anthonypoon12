@@ -1,6 +1,7 @@
 #include <iostream>
-#include "caesar.h"
 #include "funcs.h"
+#include <cctype>
+#include <vector>
 char shiftChar(char c, int rshift)
 {
 	char output = c;
@@ -54,4 +55,23 @@ std::string decryptVigenere(std::string ciphertext, std::string keyword)
 	}
 	output =encryptVigenere(ciphertext, dummy);
 	return output;
+}
+std::string solve(std::string encrypted_string)
+{
+    int fofinput[26];
+    std::string dummy = "";
+    for (char c: encrypted_string)
+    {
+        if (!isspace(c))
+            dummy+=tolower(c);
+    }
+    for (char d: dummy)
+    {
+        fofinput[d-'a']+=1;
+    }
+    for (int i = 0; i < sizeof(fofinput)/sizeof(fofinput[0]);i++)
+    {
+        fofinput[i]=(double)fofinput[i]/dummy.size();
+    }
+    return dummy;
 }
