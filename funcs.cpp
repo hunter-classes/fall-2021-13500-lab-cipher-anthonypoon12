@@ -77,10 +77,10 @@ std::vector<std::vector<int>> helper(double input[26], int s)//creates a vector 
 }
 double distance(std::vector<int> input, double base[26])
 {
-	int sum = 0;
+	double sum = 0;
 	for (int i = 0 ;i  < input.size(); i++)
 	{
-		sum += pow(input[i]-base[i],2);
+		sum += pow((input[i]-base[i]),2);
 	}
 	return sqrt(sum);
 }
@@ -133,11 +133,13 @@ std::string solve(std::string encrypted_string, std::string filename)
 	int ind = 0;
 	for (int i = 1; i < rotations.size(); i++)
 	{
+	//	std::cout<<i<<" , "<<distance(rotations[i],frequencies)<<"\n";
 		if (minimum > distance(rotations[i],frequencies))
 		{
 			minimum = distance(rotations[i],frequencies);
 			ind = i;
 		}
+	std::cout<<ind<<" hi\n";
 	}
 	dummy=encryptCaesar(dummy,ind);
     return dummy;
