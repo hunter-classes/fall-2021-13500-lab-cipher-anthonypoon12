@@ -56,6 +56,23 @@ std::string decryptVigenere(std::string ciphertext, std::string keyword)
 	output =encryptVigenere(ciphertext, dummy);
 	return output;
 }
+std::vector<std::vector<int>> helper(int input[26], int s)//creates a vector made of all the rotations of the input vector
+{
+    std::vector<std::vector<int>> output;
+    for (int i = 0 ; i < s; i++)
+    {
+        std::vector<int> miniout;
+        for (int j = 0; j < s;j++)
+        {
+            int a = i+j;
+            if (a>s-1)
+                a = i+j - s;
+            miniout.push_back(input[a]);
+        }
+        output.push_back(miniout);
+    }
+    return output;
+}
 std::string solve(std::string encrypted_string)
 {
     int fofinput[26];
@@ -73,5 +90,6 @@ std::string solve(std::string encrypted_string)
     {
         fofinput[i]=(double)fofinput[i]/dummy.size();
     }
-    return dummy;
+    std::vector<std::vector<int>> rotations = helper(fofinput,sizeof(fofinput)/sizeof(fofinput[0]));
+    return "";
 }
