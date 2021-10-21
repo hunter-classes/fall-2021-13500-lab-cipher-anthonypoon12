@@ -82,6 +82,7 @@ double distance(std::vector<int> input, double base[26])
 	{
 		sum += pow((input[i]-base[i]),2);
 	}
+//	std::cout<<sqrt(sum)<<" cool\n";
 	return sqrt(sum);
 }
 void addfrequencies(double input[],std::string filename)
@@ -130,6 +131,7 @@ std::string solve(std::string encrypted_string, std::string filename)
     }
     std::vector<std::vector<int>> rotations = helper(fofinput,sizeof(fofinput)/sizeof(fofinput[0]));
 	double minimum = distance(rotations[0],frequencies);
+//	std::cout<<minimum<<" this is first\n";
 	int ind = 0;
 	for (int i = 1; i < rotations.size(); i++)
 	{
@@ -139,8 +141,9 @@ std::string solve(std::string encrypted_string, std::string filename)
 			minimum = distance(rotations[i],frequencies);
 			ind = i;
 		}
-	std::cout<<ind<<" hi\n";
+//	std::cout<<ind<<" hi "<<minimum<<"\n";
 	}
+//	std::cout<<encryptCaesar(dummy,21);
 	dummy=encryptCaesar(dummy,ind);
     return dummy;
 }
