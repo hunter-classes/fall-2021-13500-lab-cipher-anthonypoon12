@@ -8,11 +8,7 @@ int main()
 	a = encryptCaesar(a,20);
 	s = encryptCaesar(s,10);
 	std::cout<<s<<"\n\n\n\n"<<a<<"\n\n\n\n";
-<<<<<<< HEAD
-	std::cout<<solve(s)<<"\n\n\n\n";
-=======
 	std::cout<<solve(s)<<"\n\n\n\n\n";
->>>>>>> 69da93ea03bc2842f0eb8b17fec8a01d1c0b622d
 	std::cout<<solve(a)<<"\n";
   return 0;
 }
