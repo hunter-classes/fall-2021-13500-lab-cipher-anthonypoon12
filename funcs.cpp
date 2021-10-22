@@ -62,11 +62,19 @@ void helper(double cases[][26], std::string input)
 {
 	for (int i = 0; i < 26; i++)
 	{
+		int ia = 0;
 		std::string dummy = encryptCaesar(input,i);
 		for (char c: dummy)
 		{
 			if ((!isspace(c))&&(isalpha(c)))
+			{
 				cases[i][tolower(c)-'a']++;
+				ia++;
+			}
+		}
+		for (int a = 0; a < 26; a++)
+		{
+			cases[i][a]=cases[i][a]/ia;
 		}
 	}
 }
