@@ -62,11 +62,19 @@ void helper(double cases[][26], std::string input)
 {
 	for (int i = 0; i < 26; i++)
 	{
+		int ia = 0;
 		std::string dummy = encryptCaesar(input,i);
 		for (char c: dummy)
 		{
 			if ((!isspace(c))&&(isalpha(c)))
+			{
 				cases[i][tolower(c)-'a']++;
+				ia++;
+			}
+		}
+		for (int a = 0; a < 26; a++)
+		{
+			cases[i][a]=cases[i][a]/ia;
 		}
 	}
 }
@@ -87,6 +95,9 @@ std::string solve(std::string encrypted_string)
                      0.06327, 0.09056, 0.02758, 0.00978, 0.02360, 0.00150,
                      0.01974, 0.00074};
 	double arr[26][26];
+	for (int a = 0; a <26; a++)
+		for (int b = 0; b < 26; b++)
+			arr[a][b]=0;
 	helper(arr, encrypted_string);
 	double minimum = distance(arr[0],frequencies);
 	int ind = 0;
