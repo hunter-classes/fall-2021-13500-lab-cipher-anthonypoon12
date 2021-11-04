@@ -1,3 +1,10 @@
+/*
+Author: Anthony Poon
+Course: CSCI-135
+Instructor: Tong Yi, Mike Zamansky
+Assignment: Lab Cipher functions
+solve function measures distance from frequencies of letters in input to the english language and decrypts input.
+ */
 #include <iostream>
 #include "funcs.h"
 #include <cctype>

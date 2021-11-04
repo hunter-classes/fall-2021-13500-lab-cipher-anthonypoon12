@@ -1,3 +1,10 @@
+/*
+Author: Anthony Poon
+Course: CSCI-135
+Instructor: Tong Yi, Mike Zamansky
+Assignment: Lab Cipher main
+main function for Lab
+*/
 #include <iostream>
 #include "funcs.h"
 
@@ -7,7 +14,7 @@ int main()
 	std:: string in2 = "Harry Potter is a series of seven fantasy novels written by British author J. K. Rowling. The novels chronicle the lives of a young wizard, Harry Potter, and his friends Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry";
 	std:: string in3 = "Computer science is the study of algorithmic processes, computational machines and computation itself.[1] As a discipline, computer science spans a range of topics from theoretical studies of algorithms, computation and information to the practical issues of implementing computational systems in hardware and software.[2][3]Its fields can be divided into theoretical and practical disciplines. For example, the theory of computation concerns abstract models of computation and general classes of problems that can be solved using them, while computer graphics or computational geometry emphasize more specific applications. Algorithms and data structures have been called the heart of computer science.[4] Programming language theory considers approaches to the description of computational processes, while computer programming involves the use of them to create complex systems. Computer architecture describes construction of computer components and computer-operated equipment. Artificial intelligence aims to synthesize goal-orientated processes such as problem-solving, decision-making, environmental adaptation, planning and learning found in humans and animals. A digital computer is capable of simulating various information processes.[5] The fundamental concern of computer science is determining what can and cannot be automated.[6] Computer scientists usually focus on academic research. The Turing Award is generally recognized as the highest distinction in computer sciences.";
 	std:: string in4 = "Hello，my name is Anthony Poon and I am a college student! Nice to meet you! By the way, do you know where the bathroom is? No? Oh well.";
-	std:: string in5 = "I like to eat big black avacados";
+	std:: string in5 = "I like to eat lots of chocolate and candy and ice cream and mushrooms and I love to play video games.";
 	std::string b = encryptCaesar(in1,15);
 	std::string d = encryptCaesar(in2,20);
 	std::string e = encryptCaesar(in3,2);
